@@ -324,25 +324,63 @@ export default function AIShoppingMallCourseHomepage() {
               </p>
               <div className="mt-8 grid gap-3">
                 {benefits.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                  <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-100">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-slate-900" />
                     <span className="text-slate-700">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <Card className="bg-slate-950 text-white shadow-xl">
+
+            <Card className="overflow-hidden bg-slate-950 text-white shadow-xl">
               <div className="p-8">
-                <LineChart className="h-12 w-12 rounded-2xl bg-white/10 p-3" />
-                <h3 className="mt-6 text-2xl font-bold">강의 핵심 목표</h3>
-                <p className="mt-4 leading-8 text-slate-300">
-                  AI를 “도구”로만 배우는 것이 아니라, 쇼핑몰 사업의 반복 업무를 줄이고 더 빠르게 테스트할 수 있는 운영 시스템을 만드는 것입니다.
+                <div className="flex items-center gap-3">
+                  <LineChart className="h-12 w-12 rounded-2xl bg-white/10 p-3 text-white" />
+                  <div>
+                    <p className="text-sm font-semibold text-slate-300">CoreWave Process</p>
+                    <h3 className="text-2xl font-bold text-white">쇼핑몰 운영 시스템 구축 흐름</h3>
+                  </div>
+                </div>
+                <p className="mt-5 leading-8 text-slate-300">
+                  AI를 단순한 도구로만 배우지 않고, 상품 기획부터 운영 개선까지 반복해서 실행할 수 있는 쇼핑몰 운영 체계를 만듭니다.
                 </p>
+
                 <div className="mt-8 grid gap-4">
-                  {["상품 기획", "상세페이지 제작", "콘텐츠 마케팅", "CS 자동화", "성과 개선"].map((step, idx) => (
-                    <div key={step} className="flex items-center gap-4 rounded-2xl bg-white/10 p-4">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-slate-950">{idx + 1}</span>
-                      <span className="font-medium">{step}</span>
+                  {[
+                    {
+                      step: "01",
+                      title: "상품 기획",
+                      desc: "판매 아이템, 고객 타깃, 가격대, 경쟁몰 분석 기준을 정리합니다.",
+                    },
+                    {
+                      step: "02",
+                      title: "상세페이지 제작",
+                      desc: "상품명, 핵심 문구, 상세페이지 구조, 구매 설득 포인트를 만듭니다.",
+                    },
+                    {
+                      step: "03",
+                      title: "쇼핑몰 구축",
+                      desc: "플랫폼을 선택하고 메인 페이지, 상품 페이지, 주문 흐름을 구성합니다.",
+                    },
+                    {
+                      step: "04",
+                      title: "콘텐츠 마케팅",
+                      desc: "광고 문구, SNS 콘텐츠, 이벤트 페이지를 AI로 빠르게 제작합니다.",
+                    },
+                    {
+                      step: "05",
+                      title: "운영 개선",
+                      desc: "CS, 리뷰, 전환율, 재구매 흐름을 점검하고 개선합니다.",
+                    },
+                  ].map((item) => (
+                    <div key={item.step} className="grid gap-4 rounded-2xl bg-white/10 p-4 ring-1 ring-white/10 sm:grid-cols-[3.5rem_1fr]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-black text-slate-950">
+                        {item.step}
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-white">{item.title}</h4>
+                        <p className="mt-1 text-sm leading-6 text-slate-300">{item.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
