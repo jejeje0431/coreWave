@@ -512,7 +512,7 @@ export default function AIShoppingMallCourseHomepage() {
               <del>₩350,000</del>
             </div>
             <div className="check-list">
-              <span className="inline-check"><ShieldCheck size={18} /> 평생 시청 가능</span>
+              <span className="inline-check"><ShieldCheck size={18} /> 대면 소그룹 강의 가능</span>
               <span className="inline-check"><ShieldCheck size={18} /> 실습 템플릿 제공</span>
               <span className="inline-check"><ShieldCheck size={18} /> 제작·유지보수 상담 가능</span>
             </div>
