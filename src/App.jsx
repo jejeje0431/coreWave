@@ -313,6 +313,68 @@ export default function AIShoppingMallCourseHomepage() {
           .process-item { grid-template-columns: 1fr; }
           .footer-inner { flex-direction: column; }
         }
+
+        /* Mobile responsive hardening */
+        html, body, #root { width: 100%; overflow-x: hidden; }
+        .container, .card, .board, .process-card, .price-card, .form-card { min-width: 0; }
+        .section-title, .hero h1, .board-title, .process-head h3, .form-card h3 { word-break: keep-all; overflow-wrap: break-word; }
+        .hero-grid > *, .section-grid > *, .benefit-grid > *, .contact-grid > * { min-width: 0; }
+
+        @media (max-width: 768px) {
+          .container { width: calc(100% - 32px); }
+          .header-inner { height: 64px; gap: 12px; }
+          .logo { font-size: 20px; white-space: nowrap; }
+          .header .btn { width: auto; min-width: 96px; min-height: 38px; padding: 0 14px; font-size: 14px; white-space: nowrap; }
+          .hero { padding: 56px 0 64px; }
+          .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+          .hero h1 { font-size: clamp(36px, 10vw, 48px); line-height: 1.15; letter-spacing: -0.045em; }
+          .hero p { font-size: 16px; line-height: 1.75; }
+          .hero-actions { width: 100%; }
+          .hero-actions .btn { width: 100%; }
+          .hero-points { flex-direction: column; gap: 10px; }
+          .hero-card { padding: 16px; border-radius: 24px; }
+          .board { padding: 20px; border-radius: 20px; }
+          .board-head { align-items: flex-start; }
+          .board-title { font-size: 24px; }
+          .board-row { padding: 14px; }
+          .status { font-size: 12px; }
+          .stats { padding: 28px 0 8px; }
+          .stats-grid, .target-grid, .service-grid, .curriculum-grid { grid-template-columns: 1fr; }
+          .section { padding: 56px 0; }
+          .section-grid, .benefit-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+          .section-title { font-size: clamp(30px, 8vw, 38px); line-height: 1.2; }
+          .section-desc { font-size: 16px; line-height: 1.75; }
+          .target-card, .service-card, .curriculum-card, .contact-info, .form-card, .price-card, .process-card { padding: 22px; border-radius: 22px; }
+          .service-grid { gap: 14px; }
+          .benefit-row { padding: 16px; }
+          .process-head { align-items: flex-start; }
+          .process-head h3 { font-size: 22px; line-height: 1.3; }
+          .process-item { grid-template-columns: 44px 1fr; gap: 12px; padding: 15px; }
+          .process-num { width: 40px; height: 40px; font-size: 13px; }
+          .price strong { font-size: clamp(30px, 8vw, 38px); line-height: 1.15; }
+          .price { align-items: flex-start; flex-direction: column; }
+          .check-list { font-size: 15px; }
+          .section-head { align-items: flex-start; flex-direction: column; }
+          .footer-inner { flex-direction: column; }
+        }
+
+        @media (max-width: 420px) {
+          .container { width: calc(100% - 24px); }
+          .header-inner { height: 60px; }
+          .logo { font-size: 18px; }
+          .header .btn { min-width: 88px; min-height: 36px; padding: 0 12px; font-size: 13px; }
+          .badge { padding: 8px 12px; font-size: 13px; }
+          .hero { padding: 44px 0 52px; }
+          .hero h1 { font-size: 34px; }
+          .hero p { font-size: 15px; }
+          .board, .target-card, .service-card, .curriculum-card, .contact-info, .form-card, .price-card, .process-card { padding: 18px; }
+          .board-row { flex-direction: column; align-items: flex-start; }
+          .section-title { font-size: 28px; }
+          .process-item { grid-template-columns: 1fr; }
+          .process-num { margin-bottom: 2px; }
+          .form-points { padding: 16px; }
+          .full-btn { width: 100%; }
+        }
       `}</style>
 
       <header className="header">
