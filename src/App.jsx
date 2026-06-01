@@ -14,12 +14,12 @@ import {
   Wrench,
   Code2,
   Headphones,
-  Mail,
   Send,
   ClipboardCheck,
+  ExternalLink,
 } from "lucide-react";
 
-const CONTACT_EMAIL = "jejeje0431@gmail.com";
+const CONSULT_FORM_URL = "https://forms.gle/6sZyzus1cnP5Qo7A9";
 
 function Button({ children, onClick, variant = "primary", className = "", type = "button" }) {
   const base = "inline-flex items-center justify-center rounded-full font-semibold transition active:scale-[0.99]";
@@ -49,6 +49,10 @@ function scrollToSection(id) {
   if (target) {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+}
+
+function openConsultForm() {
+  window.open(CONSULT_FORM_URL, "_blank", "noopener,noreferrer");
 }
 
 const curriculum = [
@@ -124,7 +128,11 @@ const faqs = [
   },
   {
     q: "직접 만들기 어려우면 제작을 맡길 수 있나요?",
-    a: "네. 코어웨이브에서 쇼핑몰 개발, 기능 개선, 유지보수, 운영 컨설팅까지 별도 상담을 통해 지원합니다.",
+    a: "네. 코어웨이브에서 쇼핑몰 개발, 기능 개선, 유지보수, 운영 컨설팅까지 별도 상담을 통해 지원합니다. 상담 신청은 홈페이지의 구글 폼을 통해 접수할 수 있습니다.",
+  },
+  {
+    q: "상담 신청은 어디서 하나요?",
+    a: "홈페이지의 상담 신청 버튼을 누르면 구글 폼이 새 창으로 열립니다. 폼에 필요한 내용을 작성해주시면 확인 후 상담을 진행합니다.",
   },
   {
     q: "어떤 AI 도구를 사용하나요?",
@@ -146,13 +154,6 @@ function FAQItem({ item, open, onClick }) {
 
 export default function AIShoppingMallCourseHomepage() {
   const [openFaq, setOpenFaq] = useState(0);
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: "쇼핑몰 제작 상담",
-    message: "",
-  });
 
   const stats = useMemo(
     () => [
@@ -162,29 +163,6 @@ export default function AIShoppingMallCourseHomepage() {
     ],
     []
   );
-
-  const mailtoHref = useMemo(() => {
-    const subject = `[코어웨이브 상담 신청] ${contactForm.service || "문의"}`;
-    const lineBreak = String.fromCharCode(10);
-    const bodyLines = [
-      "코어웨이브 상담 신청입니다.",
-      "",
-      `이름: ${contactForm.name}`,
-      `연락처: ${contactForm.phone}`,
-      `이메일: ${contactForm.email}`,
-      `문의 유형: ${contactForm.service}`,
-      "",
-      "문의 내용:",
-      contactForm.message,
-    ];
-    const body = bodyLines.join(lineBreak);
-
-    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }, [contactForm]);
-
-  const handleContactChange = (field, value) => {
-    setContactForm((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
@@ -199,7 +177,7 @@ export default function AIShoppingMallCourseHomepage() {
             <button onClick={() => scrollToSection("curriculum")} type="button">커리큘럼</button>
             <button onClick={() => scrollToSection("contact")} type="button">문의하기</button>
           </nav>
-          <Button className="h-10 px-5" onClick={() => scrollToSection("contact")}>상담 신청</Button>
+          <Button className="h-10 px-5" onClick={openConsultForm}>상담 신청</Button>
         </div>
       </header>
 
@@ -218,7 +196,7 @@ export default function AIShoppingMallCourseHomepage() {
               상품 선정부터 상세페이지 제작, 쇼핑몰 구축, 콘텐츠 마케팅, 고객 응대 자동화까지. 직접 배우고 싶은 분에게는 강의를, 혼자 만들기 어려운 분에게는 쇼핑몰 개발과 유지보수 상담을 제공합니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button variant="light" className="h-12 px-7 text-base" onClick={() => scrollToSection("contact")}>
+              <Button variant="light" className="h-12 px-7 text-base" onClick={openConsultForm}>
                 상담 신청하기 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button variant="outlineLight" className="h-12 px-7 text-base" onClick={() => scrollToSection("curriculum")}>
@@ -246,7 +224,7 @@ export default function AIShoppingMallCourseHomepage() {
                   {[
                     ["상품 상세페이지", "완성"],
                     ["AI 광고 문구", "생성 중"],
-                    ["개발·유지보수 상담", "신청 가능"],
+                    ["개발·유지보수 상담", "폼 접수 가능"],
                   ].map(([name, status]) => (
                     <div key={name} className="flex items-center justify-between rounded-2xl bg-slate-100 p-4">
                       <span className="font-medium">{name}</span>
@@ -314,10 +292,10 @@ export default function AIShoppingMallCourseHomepage() {
               <SectionBadge>쇼핑몰 제작·유지보수</SectionBadge>
               <h2 className="mt-6 text-3xl font-bold leading-tight md:text-4xl">혼자 만들기 어려운 분들을 위해 코어웨이브가 직접 개발합니다.</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                강의를 보고 직접 구축할 수도 있고, 시간이 부족하거나 기술 구현이 어려운 경우에는 코어웨이브에 쇼핑몰 제작과 운영 개선을 상담할 수 있습니다.
+                강의를 보고 직접 구축할 수도 있고, 시간이 부족하거나 기술 구현이 어려운 경우에는 구글 폼으로 쇼핑몰 제작과 운영 개선 상담을 신청할 수 있습니다.
               </p>
-              <Button className="mt-8 h-12 px-7 text-base" onClick={() => scrollToSection("contact")}>
-                제작 상담 문의하기 <ArrowRight className="ml-2 h-4 w-4" />
+              <Button className="mt-8 h-12 px-7 text-base" onClick={openConsultForm}>
+                제작 상담 신청하기 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -406,7 +384,7 @@ export default function AIShoppingMallCourseHomepage() {
             <SectionBadge>수강 신청</SectionBadge>
             <h2 className="mt-6 text-3xl font-bold leading-tight md:text-5xl">AI를 활용해 첫 쇼핑몰을 빠르게 오픈해보세요.</h2>
             <p className="mt-5 max-w-2xl leading-8 text-slate-300">
-              지금 신청하면 강의 자료, AI 프롬프트 모음, 상세페이지 구성 템플릿, 운영 체크리스트를 함께 제공합니다. 직접 구축이 부담된다면 제작·유지보수 상담으로 연결할 수 있습니다.
+              지금 신청하면 강의 자료, AI 프롬프트 모음, 상세페이지 구성 템플릿, 운영 체크리스트를 함께 제공합니다. 직접 구축이 부담된다면 구글 폼을 통해 제작·유지보수 상담을 신청할 수 있습니다.
             </p>
           </div>
           <Card className="text-slate-950 shadow-2xl">
@@ -421,10 +399,10 @@ export default function AIShoppingMallCourseHomepage() {
                 <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4" />실습 템플릿 제공</span>
                 <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4" />제작·유지보수 상담 가능</span>
               </div>
-              <Button className="mt-8 h-12 w-full text-base" onClick={() => scrollToSection("contact")}>
+              <Button className="mt-8 h-12 w-full text-base" onClick={openConsultForm}>
                 지금 상담 신청하기 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <p className="mt-4 text-center text-xs text-slate-500">정원 마감 시 사전 공지 없이 신청이 종료될 수 있습니다.</p>
+              <p className="mt-4 text-center text-xs text-slate-500">상담 신청은 구글 폼으로 접수되며, 확인 후 순차적으로 연락드립니다.</p>
             </div>
           </Card>
         </div>
@@ -436,15 +414,15 @@ export default function AIShoppingMallCourseHomepage() {
             <SectionBadge>문의하기</SectionBadge>
             <h2 className="mt-6 text-3xl font-bold leading-tight md:text-4xl">강의 수강, 쇼핑몰 제작, 유지보수 상담을 신청하세요.</h2>
             <p className="mt-5 leading-8 text-slate-600">
-              문의 내용을 작성한 뒤 상담 신청 버튼을 누르면 입력한 내용이 메일로 작성됩니다. 코어웨이브가 확인 후 상담을 진행합니다.
+              상담 신청은 구글 폼으로 접수합니다. 필요한 내용을 남겨주시면 코어웨이브가 확인 후 순차적으로 연락드립니다.
             </p>
             <Card className="mt-8">
               <div className="p-6">
                 <div className="flex items-center gap-3">
-                  <Mail className="h-10 w-10 rounded-2xl bg-slate-100 p-2 text-slate-950" />
+                  <ClipboardCheck className="h-10 w-10 rounded-2xl bg-slate-100 p-2 text-slate-950" />
                   <div>
-                    <p className="text-sm text-slate-500">상담 접수 메일</p>
-                    <p className="font-bold text-slate-950">{CONTACT_EMAIL}</p>
+                    <p className="text-sm text-slate-500">상담 신청 방식</p>
+                    <p className="font-bold text-slate-950">구글 폼 작성 후 접수</p>
                   </div>
                 </div>
                 <div className="mt-6 grid gap-3 text-sm text-slate-600">
@@ -458,65 +436,23 @@ export default function AIShoppingMallCourseHomepage() {
 
           <Card className="shadow-xl">
             <div className="p-6 md:p-8">
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="grid gap-2 text-sm font-medium text-slate-700">
-                  이름
-                  <input
-                    className="h-12 rounded-2xl border bg-slate-50 px-4 outline-none transition focus:border-slate-900 focus:bg-white"
-                    placeholder="성함을 입력해주세요"
-                    value={contactForm.name}
-                    onChange={(e) => handleContactChange("name", e.target.value)}
-                  />
-                </label>
-                <label className="grid gap-2 text-sm font-medium text-slate-700">
-                  연락처
-                  <input
-                    className="h-12 rounded-2xl border bg-slate-50 px-4 outline-none transition focus:border-slate-900 focus:bg-white"
-                    placeholder="010-0000-0000"
-                    value={contactForm.phone}
-                    onChange={(e) => handleContactChange("phone", e.target.value)}
-                  />
-                </label>
+              <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">
+                <ExternalLink className="h-4 w-4" /> Google Form
               </div>
-              <label className="mt-4 grid gap-2 text-sm font-medium text-slate-700">
-                이메일
-                <input
-                  className="h-12 rounded-2xl border bg-slate-50 px-4 outline-none transition focus:border-slate-900 focus:bg-white"
-                  placeholder="답변 받을 이메일을 입력해주세요"
-                  value={contactForm.email}
-                  onChange={(e) => handleContactChange("email", e.target.value)}
-                />
-              </label>
-              <label className="mt-4 grid gap-2 text-sm font-medium text-slate-700">
-                문의 유형
-                <select
-                  className="h-12 rounded-2xl border bg-slate-50 px-4 outline-none transition focus:border-slate-900 focus:bg-white"
-                  value={contactForm.service}
-                  onChange={(e) => handleContactChange("service", e.target.value)}
-                >
-                  <option>쇼핑몰 제작 상담</option>
-                  <option>유지보수 상담</option>
-                  <option>강의 수강 문의</option>
-                  <option>기능 개선 문의</option>
-                  <option>기타 문의</option>
-                </select>
-              </label>
-              <label className="mt-4 grid gap-2 text-sm font-medium text-slate-700">
-                문의 내용
-                <textarea
-                  className="min-h-36 rounded-2xl border bg-slate-50 px-4 py-3 outline-none transition focus:border-slate-900 focus:bg-white"
-                  placeholder="현재 상황, 필요한 기능, 원하는 오픈 일정 등을 적어주세요."
-                  value={contactForm.message}
-                  onChange={(e) => handleContactChange("message", e.target.value)}
-                />
-              </label>
-              <a href={mailtoHref} className="mt-6 block">
-                <div className="inline-flex h-12 w-full items-center justify-center rounded-full bg-slate-950 px-6 text-base font-semibold text-white transition hover:bg-slate-800">
-                  문의 메일 보내기 <Send className="ml-2 h-4 w-4" />
-                </div>
+              <h3 className="mt-5 text-2xl font-bold leading-tight text-slate-950">상담 신청서를 작성해주세요.</h3>
+              <p className="mt-4 leading-8 text-slate-600">
+                구글 폼에 이름, 연락처, 문의 유형, 현재 상황을 남겨주시면 확인 후 상담을 진행합니다. 강의 수강 문의와 쇼핑몰 제작·유지보수 상담 모두 같은 폼에서 접수할 수 있습니다.
+              </p>
+              <div className="mt-6 grid gap-3 rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
+                <span className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />별도 메일 앱 없이 바로 신청할 수 있습니다.</span>
+                <span className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />상담 내용은 구글 폼으로 안전하게 접수됩니다.</span>
+                <span className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />접수 후 확인 순서대로 연락드립니다.</span>
+              </div>
+              <a href={CONSULT_FORM_URL} target="_blank" rel="noreferrer" className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-full bg-slate-950 px-6 text-base font-semibold text-white transition hover:bg-slate-800">
+                구글 폼으로 상담 신청하기 <Send className="ml-2 h-4 w-4" />
               </a>
               <p className="mt-4 text-center text-xs leading-6 text-slate-500">
-                현재 버튼은 메일 앱을 열어 상담 내용을 발송하는 방식입니다. 실제 서버 접수형 폼으로 전환하려면 별도 연동이 필요합니다.
+                버튼을 누르면 새 창에서 상담 신청 구글 폼이 열립니다.
               </p>
             </div>
           </Card>
