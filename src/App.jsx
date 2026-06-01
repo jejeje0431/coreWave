@@ -251,15 +251,15 @@ export default function AIShoppingMallCourseHomepage() {
         .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
         .benefits { display: grid; gap: 12px; margin-top: 28px; }
         .benefit-row { display: flex; align-items: flex-start; gap: 12px; padding: 18px; background: #fff; border-radius: 18px; box-shadow: 0 10px 26px rgba(15,23,42,.06); color: #334155; }
-        .process-card { background: #020617; color: #fff; padding: 32px; }
+        .process-card { background: #fff !important; color: #020617 !important; padding: 32px; border: 1px solid #e2e8f0; box-shadow: 0 18px 48px rgba(15,23,42,.08); }
         .process-head { display: flex; align-items: center; gap: 14px; }
-        .process-head h3 { margin: 4px 0 0; font-size: 26px; }
-        .process-card > p { color: #cbd5e1; line-height: 1.8; margin: 20px 0 0; }
+        .process-head h3 { margin: 4px 0 0; font-size: 26px; color: #020617 !important; }
+        .process-card > p { color: #475569 !important; line-height: 1.8; margin: 20px 0 0; font-weight: 600; }
         .process-list { display: grid; gap: 14px; margin-top: 28px; }
-        .process-item { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 18px; border-radius: 18px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.1); }
-        .process-num { width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #020617; font-weight: 950; }
-        .process-item h4 { margin: 0; font-size: 19px; }
-        .process-item p { margin: 6px 0 0; color: #cbd5e1; line-height: 1.65; font-size: 14px; }
+        .process-item { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 18px; border-radius: 18px; background: #f8fafc !important; border: 1px solid #e2e8f0 !important; }
+        .process-num { width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #020617 !important; color: #fff !important; font-weight: 950; }
+        .process-item h4 { margin: 0; font-size: 19px; color: #020617 !important; font-weight: 950; }
+        .process-item p { margin: 6px 0 0; color: #475569 !important; line-height: 1.65; font-size: 15px; font-weight: 600; }
         .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 28px; }
         .time-note { display: inline-flex; align-items: center; gap: 8px; color: #64748b; font-weight: 700; }
         .curriculum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -451,27 +451,29 @@ export default function AIShoppingMallCourseHomepage() {
               ))}
             </div>
           </div>
-          <Card className="process-card">
+          <div className="process-card" style={{ background: "#ffffff", color: "#020617", borderRadius: 28, padding: 32, border: "1px solid #e2e8f0", boxShadow: "0 18px 48px rgba(15,23,42,.08)" }}>
             <div className="process-head">
               <div className="icon-box"><LineChart size={25} /></div>
               <div>
-                <p className="eyebrow">CoreWave Process</p>
-                <h3>쇼핑몰 운영 시스템 구축 흐름</h3>
+                <p className="eyebrow" style={{ color: "#64748b" }}>CoreWave Process</p>
+                <h3 style={{ color: "#020617", margin: "4px 0 0", fontSize: 26 }}>쇼핑몰 운영 시스템 구축 흐름</h3>
               </div>
             </div>
-            <p>AI를 단순한 도구로만 배우지 않고, 상품 기획부터 운영 개선까지 반복해서 실행할 수 있는 쇼핑몰 운영 체계를 만듭니다.</p>
+            <p style={{ color: "#475569", lineHeight: 1.8, marginTop: 20, fontWeight: 600 }}>
+              AI를 단순한 도구로만 배우지 않고, 상품 기획부터 운영 개선까지 반복해서 실행할 수 있는 쇼핑몰 운영 체계를 만듭니다.
+            </p>
             <div className="process-list">
               {processSteps.map((item) => (
-                <div className="process-item" key={item.step}>
-                  <div className="process-num">{item.step}</div>
+                <div className="process-item" key={item.step} style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}>
+                  <div className="process-num" style={{ background: "#020617", color: "#ffffff" }}>{item.step}</div>
                   <div>
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
+                    <h4 style={{ color: "#020617", fontWeight: 950 }}>{item.title}</h4>
+                    <p style={{ color: "#475569", fontWeight: 600 }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
